@@ -9,49 +9,43 @@
 <style>
 body {
     margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
     color: white;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
-/* Layout */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Text */
+/* TEXT */
 h1 { font-size: 6vw; margin: 10px; }
 h2 { font-size: 4.5vw; margin: 5px; }
 p  { font-size: 4vw; margin: 10px; }
 
-/* 🔥 FULL FRAME */
+/* 🔥 FULL WIDTH FRAME */
 .frame {
-    width: 100%;
+    width: 100vw;      /* FULL WIDTH */
     height: 70vh;
-    padding: 8px;
+    margin: 0;
+    padding: 0;
 }
 
-/* Slideshow */
+/* SLIDESHOW FULL */
 .slideshow {
     width: 100%;
     height: 100%;
-    border-radius: 20px;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
 }
 
-/* 🔥 MAIN FIX (FULL COVER) */
+/* 🔥 MEDIA FULL COVER */
 .slideshow img,
 .slideshow video {
     position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover;          /* FULL FILL */
-    object-position: center;    /* center focus */
+    object-fit: cover;      /* fills full width */
+    object-position: center;
     opacity: 0;
     transition: opacity 1s;
 }
@@ -60,7 +54,7 @@ p  { font-size: 4vw; margin: 10px; }
     opacity: 1 !important;
 }
 
-/* Button */
+/* BUTTON */
 button {
     margin-top: 10px;
     padding: 10px 20px;
@@ -71,7 +65,7 @@ button {
     font-size: 4vw;
 }
 
-/* Hearts */
+/* HEARTS */
 .heart {
     position: absolute;
     bottom: -10px;
@@ -88,45 +82,41 @@ button {
 
 <body>
 
-<div class="container">
+<h1>🎉 Happy 4th Marriage Anniversary 🎉</h1>
+<h2>Dear Bhaiya ❤️ Bhabhi</h2>
 
-    <h1>🎉 Happy 4th Marriage Anniversary 🎉</h1>
-    <h2>Dear Bhaiya ❤️ Bhabhi</h2>
+<p>
+    Celebrating 4 beautiful years of love, laughter 💕<br>
+    Your bond is truly inspiring ✨
+</p>
 
-    <p>
-        Celebrating 4 beautiful years of love, laughter 💕<br>
-        Your bond is truly inspiring ✨
-    </p>
+<!-- 🔥 FULL WIDTH FRAME -->
+<div class="frame">
+    <div class="slideshow">
+        <img src="photo1.jpg" class="active">
+        <img src="photo2.jpg">
+        <img src="photo3.jpg">
 
-    <!-- 🔥 FULL FRAME -->
-    <div class="frame">
-        <div class="slideshow">
-            <img src="photo1.jpg" class="active">
-            <img src="photo2.jpg">
-            <img src="photo3.jpg">
+        <video muted playsinline>
+            <source src="video.mp4" type="video/mp4">
+        </video>
 
-            <video muted playsinline>
-                <source src="video.mp4" type="video/mp4">
-            </video>
-
-            <img src="photo4.jpg">
-        </div>
+        <img src="photo4.jpg">
     </div>
-
-    <button onclick="startExperience()">Start 💖</button>
-
-    <p id="msg" style="display:none;">
-        May your journey always be filled with endless love ❤️,<br>
-        joy 😊, and beautiful memories ✨<br><br>
-        Stay happy forever 🥰
-    </p>
-
-    <!-- MUSIC -->
-    <audio id="bgMusic" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
-
 </div>
+
+<button onclick="startExperience()">Start 💖</button>
+
+<p id="msg" style="display:none;">
+    May your journey always be filled with endless love ❤️,<br>
+    joy 😊, and beautiful memories ✨<br><br>
+    Stay happy forever 🥰
+</p>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 let slides, index = 0, startX = 0, endX = 0, music;
@@ -194,7 +184,7 @@ function prevSlide() {
     showSlide(index);
 }
 
-/* Hearts */
+/* HEARTS */
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
