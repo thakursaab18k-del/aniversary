@@ -30,15 +30,16 @@ h1 { font-size: 6vw; margin: 10px; }
 h2 { font-size: 4.5vw; margin: 5px; }
 p  { font-size: 4vw; margin: 10px; }
 
-/* Slideshow */
+/* Slideshow FIXED */
 .slideshow {
     width: 90%;
-    max-width: 350px;
-    height: 50vh;
-    max-height: 450px;
+    max-width: 320px;
+    height: 60vh;
+    max-height: 420px;
     border-radius: 20px;
     overflow: hidden;
     position: relative;
+    margin: 10px auto;
 }
 
 .slideshow img,
@@ -47,6 +48,7 @@ p  { font-size: 4vw; margin: 10px; }
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     opacity: 0;
     transition: opacity 1s;
 }
@@ -124,16 +126,39 @@ button {
 </div>
 
 <script>
-let slides = document.querySelectorAll(".slideshow img, .slideshow video");
+let slides;
 let index = 0;
 let startX = 0;
 let endX = 0;
+let music;
 
-const music = document.getElementById("bgMusic");
+/* Run after page loads (FIXED) */
+document.addEventListener("DOMContentLoaded", () => {
+    slides = document.querySelectorAll(".slideshow img, .slideshow video");
+    music = document.getElementById("bgMusic");
 
-/* Start */
+    showSlide(index);
+
+    const slideshow = document.querySelector(".slideshow");
+
+    slideshow.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+    });
+
+    slideshow.addEventListener("touchend", e => {
+        endX = e.changedTouches[0].clientX;
+        let diff = startX - endX;
+
+        if (diff > 50) nextSlide();
+        else if (diff < -50) prevSlide();
+    });
+});
+
+/* Start button FIXED */
 function startExperience() {
-    if (music) music.play();
+    if (music) {
+        music.play().catch(() => {});
+    }
     document.getElementById("msg").style.display = "block";
 }
 
@@ -177,14 +202,22 @@ function prevSlide() {
     showSlide(index);
 }
 
-/* Start slideshow */
-showSlide(index);
+/* Floating hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
 
-/* Swipe */
-const slideshow = document.querySelector(".slideshow");
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
 
-slideshow.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-});
+    document.body.appendChild(heart);
 
-sl
+    setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
